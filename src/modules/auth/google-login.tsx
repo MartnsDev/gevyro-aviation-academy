@@ -2,6 +2,7 @@
 import {useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import {supabase} from './client';
 
 export function GoogleLogin({error}:{error:string}){
@@ -23,12 +24,7 @@ export function GoogleLogin({error}:{error:string}){
   <div className="login-ribbon login-ribbon-bottom" aria-hidden="true"/>
   <header className="login-header">
    <Link className="login-brand" href="/" aria-label="Gevyro Aviation Academy">
-    <svg className="gevyro-mark" viewBox="0 0 100 100" role="img" aria-label="Símbolo Gevyro">
-     <circle cx="48" cy="52" r="35" fill="#0b3975"/>
-     <path d="M68 30A28 28 0 1 0 75 58H50V48h35v7A38 38 0 1 1 74 22z" fill="#f5f9ff"/>
-     <path d="m17 64 47-15 25-24-6 20-23 12-37 13 14-11z" fill="#1675e8"/>
-     <path d="m54 53 17-27 5 1-8 29-18 8z" fill="#1675e8"/>
-    </svg>
+    <Image className="gevyro-mark" src="/gevyro-logo.png" alt="Logo Gevyro" width={106} height={72} priority/>
     <span className="login-brand-rule"/>
     <span className="login-brand-type"><strong>Gevyro</strong><small>Aviation Academy</small></span>
    </Link>
