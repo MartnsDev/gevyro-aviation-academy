@@ -14,8 +14,7 @@ export function GoogleLogin({error}:{error:string}){
   setBusy(true);
   try{
    if(!supabase)throw new Error('Não foi possível conectar ao serviço de autenticação.');
-   const{error}=await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:`${window.location.origin}/auth/callback`,queryParams:{prompt:'select_account'}}});
-   if(error)throw error;
+   window.location.assign(new URL('/auth/google',window.location.origin).href);
   }catch(reason){setBusy(false);setLocalError(reason instanceof Error?reason.message:'Falha ao iniciar login com Google.');}
  }
  return <main className="login-screen">
