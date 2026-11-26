@@ -45,7 +45,7 @@ A foto do hangar é de [Adam Roye no Unsplash](https://unsplash.com/photos/priva
 
 ## Conteúdo e segurança educacional
 
-O app oferece 12 cadernos autorais do MMA Básico com 20 questões cada, relacionados aos PDFs fornecidos e ao currículo mínimo da IS ANAC 141-007D. São exercícios de revisão, não questões oficiais. Os gabaritos são preliminares e o material aguarda revisão técnica de instrutor. Consulte [docs/MMABAS.md](docs/MMABAS.md) para ver os temas e os limites da extração. Os PDFs originais não são copiados para o repositório nem enviados automaticamente ao Supabase; importe-os pela biblioteca no seu dispositivo.
+O app oferece 12 cadernos autorais do MMA Básico com 20 questões cada, relacionados aos PDFs fornecidos e ao currículo mínimo da IS ANAC 141-007D. São exercícios de revisão, não questões oficiais. Os gabaritos são preliminares e o material aguarda revisão técnica de instrutor. Consulte [docs/MMABAS.md](docs/MMABAS.md) para ver os temas e os limites da extração. As 12 apostilas fornecidas estão incluídas como cópias otimizadas em `public/apostilas`; os arquivos originais na pasta de origem não foram alterados. Como os PDFs são arquivos estáticos do repositório público, seus links diretos não exigem login Google. Para restringir os arquivos aos usuários autenticados, será necessário migrá-los para um bucket privado e usar URLs autenticadas.
 
 Questões e vocabulário autorais são identificados como pendentes de revisão. A plataforma não representa simulados como provas oficiais nem inventa gabaritos oficiais.
 
@@ -65,4 +65,4 @@ Testes de RLS e concorrência: `tests/security.sql`, executado numa transação 
 
 ## Publicação Vercel Hobby
 
-A publicação aguarda login aprovado na conta Vercel. Após aprovação, configure as variáveis de ambiente no projeto Vercel e publique pelo dashboard ou CLI. Selecione somente o plano Hobby. Nunca publique arquivos `.env.local`, backups, apostilas protegidas ou credenciais.
+Vincule o projeto Vercel existente ao repositório `MartnsDev/gevyro-aviation-academy`, branch `main`, para publicar novos commits automaticamente. Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` e `NEXT_PUBLIC_STORAGE_LIMIT_BYTES` nas variáveis de ambiente de produção da Vercel. Mantenha a conta no plano Hobby. Não publique `.env.local`, arquivos de backup ou credenciais. Os PDFs em `public/apostilas` são públicos por link direto.
