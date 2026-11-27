@@ -48,3 +48,49 @@
  .focus-reader{display:flex;flex-direction:column;height:100dvh;overflow:auto;}
  .focus-reader .reader-layout{display:flex;flex:1;min-height:0;height:auto;overflow:visible;}
 }
+
+/* Adaptive shell and touch targets for phones and tablets. */
+@media(max-width:1024px){
+ .sidebar{transform:translateX(-100%);width:min(290px,86vw);padding:1.1rem .85rem .8rem;transition:transform .2s ease;box-shadow:0 12px 36px #102b4e22}
+ .sidebar.mobile-open{transform:translateX(0)}
+ .sidebar-backdrop{position:fixed;inset:0;background:#0b1f3d99;z-index:39;touch-action:manipulation}
+ .main-shell{margin-left:0;min-width:0;width:100%}
+ .mobile-menu{display:inline-flex;min-width:42px;min-height:42px;align-items:center;justify-content:center}
+ .topbar{position:sticky;top:0;z-index:35;padding-inline:clamp(.75rem,3vw,1.5rem)}
+ .main-content{width:100%;padding-inline:clamp(.85rem,3vw,1.5rem)}
+ .main-content>*{min-width:0;max-width:100%}
+ .panel,.card,.reader,.settings-grid>*{min-width:0;max-width:100%}
+ .section-heading,.page-heading{flex-wrap:wrap}
+ .table-row{gap:.65rem;flex-wrap:wrap}
+ .table-row>*{min-width:0;overflow-wrap:anywhere}
+ button,.btn,[role="button"]{touch-action:manipulation}
+}
+@media(max-width:520px){
+ .topbar{height:60px;padding-inline:.55rem;gap:.25rem}
+ .topbar>.row,.topbar .row{min-width:0;gap:.15rem}
+ .topbar-actions{flex:0 0 auto;gap:.05rem}
+ .topbar-actions>.btn,.topbar-actions>button{min-width:40px;min-height:40px;padding:.45rem}
+ .sync-pill{min-width:34px;min-height:40px;justify-content:center}
+ .main-content{padding:.9rem .75rem}
+ .page-heading{gap:.6rem}
+ .page-heading h1{font-size:1.35rem;overflow-wrap:anywhere}
+ .hero-banner{min-height:220px;padding:1.35rem}
+ .hero-banner h2{font-size:1.5rem}
+ .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+ .stat{min-width:0;padding:.8rem;min-height:112px}
+ .stat strong{font-size:1.35rem;overflow-wrap:anywhere}
+ .book-grid{grid-template-columns:minmax(0,1fr);gap:.85rem}
+ .book-cover{height:clamp(150px,48vw,210px)}
+ .book-info h3,.pinned-copy h3{overflow-wrap:anywhere}
+ .book-info small{font-size:.68rem}
+ .book-actions{gap:.35rem}
+ .book-actions .btn{min-height:40px;font-size:.72rem}
+ .panel{padding:.9rem}
+ .modal-backdrop{align-items:flex-end;padding:.4rem}
+ .modal{width:100%;max-height:92dvh;overflow:auto;border-radius:1rem 1rem .5rem .5rem;padding:1rem}
+ .document-tabs{gap:.35rem;overflow-x:auto;overscroll-behavior-x:contain}
+ .document-tabs>div{flex:0 0 auto;max-width:82vw}
+ .document-tabs>div>button:first-child{max-width:68vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .app-footer{padding:.9rem .75rem}
+ .app-footer small{font-size:.68rem;line-height:1.5}
+}
