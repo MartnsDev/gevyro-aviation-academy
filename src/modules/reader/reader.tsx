@@ -97,10 +97,10 @@ export function Reader({ user, documentId, onError }: { user: string; documentId
         let initialMode = old?.mode ?? 'single';
 
         if (mobile) {
-          const firstPage = await pdf.getPage(savedPage);
-          const pageWidth = firstPage.getViewport({ scale: 1 }).width;
+          // Mount the reader immediately; refine this estimate after PDF.js starts rendering.
+          // Waiting for getPage(savedPage) here delayed the whole reader on large remote PDFs.
           const availableWidth = (container.current?.clientWidth || window.innerWidth) - 20;
-          initialZoom = Math.max(0.25, Math.min(3, availableWidth / pageWidth));
+          initialZoom = Math.max(0.25, Math.min(3, availableWidth / 595.28));
           initialMode = 'single';
           fitWidth.current = true;
         }
@@ -444,7 +444,7 @@ export function Reader({ user, documentId, onError }: { user: string; documentId
             }, 500);
           }}
         >
-          {busy && <div className="reader-state" role="status"><RefreshCw className="spin" size={22}/><span>Preparando a apostila…</span><small>Em arquivos grandes, o carregamento inicial pode levar alguns instantes.</small></div>}
+          {busy && <div className="reader-state" role="status"><RefreshCw className="spin" size={22}/><span>Abrindo o leitor…</span><small>A primeira página aparece assim que estiver pronta.</small></div>}
           {!busy && loadError && <div className="reader-state reader-state-error" role="alert"><strong>Não foi possível abrir esta apostila.</strong><span>{loadError}</span><Button variant="outline" onClick={() => setRetry((value) => value + 1)}><RefreshCw size={16}/>Tentar novamente</Button></div>}
           {!busy && !loadError && doc && (
             <div className={mode === 'spread' && !isMobile ? 'spread-pages' : ''}>
