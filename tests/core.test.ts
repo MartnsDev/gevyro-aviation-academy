@@ -10,6 +10,8 @@ import {centerOfGravity,finite,divide} from '@/modules/calculators/engine';
 import {terms,lessonTopics} from '@/modules/english/content';
 import {guideLessons,simulatedReport} from '@/modules/english/guide-content';
 import {seedContent} from '@/lib/seed';
+import {NextRequest} from 'next/server';
+import {appUrl} from '@/modules/auth/site-url';
 const user='f0000000-0000-4000-8000-000000000001';const other='f0000000-0000-4000-8000-000000000002';
 beforeEach(async()=>{await db.records.clear();await db.operations.clear();await db.files.clear();});
 describe('PDF and persistence',()=>{
@@ -18,6 +20,7 @@ describe('PDF and persistence',()=>{
  it('soft deletes and restores annotations',async()=>{const id=await save(user,'annotations',{body:'Revisar corrosão',page:2,rects:[[.1,.2,.3,.04]]});await softDelete(user,id);expect((await db.records.get(id))?.deleted_at).toBeTruthy();await softDelete(user,id,true);expect((await db.records.get(id))?.deleted_at).toBeNull();await clearUser(other);expect(await db.records.count()).toBe(1);});
 });
 describe('workbook',()=>{
+ it('never sends production OAuth callbacks to localhost',()=>{expect(appUrl(new NextRequest('http://localhost:3000/auth/google'),'/auth/callback',{production:true,configuredSiteUrl:'http://localhost:3000'}).toString()).toBe('https://gevyro-aviation-academy.vercel.app/auth/callback');});
  it('preserves numbering, alternatives and page without inventing a key',()=>{const q=parseQuestions('Capítulo 2\n12. Qual termo?\na) bolt\nb) nut\n13. Explique a diferença.', 'doc',4);expect(q).toHaveLength(2);expect(q[0]).toMatchObject({number:'12',page:4,kind:'multiple',options:['bolt','nut']});expect(q[1].kind).toBe('essay');expect(grade('0')).toBeNull();});
  it('grades equivalent punctuation and decimal formats',()=>{expect(grade('  AÇÃO: antes da instalação!','acao antes da instalacao')).toBe(true);expect(grade('25,4','25.4')).toBe(true);expect(grade('25,4 mm','25.4 in')).toBe(false);});
  it('requires provenance in imported answer keys',()=>{expect(parseAnswerKeys('numero,resposta,fonte\n12,A,Material autorizado')[0].answer).toBe('A');expect(()=>parseAnswerKeys('numero,resposta\n12,A')).toThrow('fonte');});
