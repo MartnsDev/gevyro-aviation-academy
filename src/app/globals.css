@@ -94,3 +94,25 @@
  .app-footer{padding:.9rem .75rem}
  .app-footer small{font-size:.68rem;line-height:1.5}
 }
+
+.install-prompt{position:fixed;z-index:120;left:50%;bottom:max(1rem,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(680px,calc(100vw - 2rem));display:grid;grid-template-columns:42px minmax(0,1fr) auto 36px;align-items:center;gap:.85rem;padding:.8rem 1rem;background:var(--panel);border:1px solid var(--border);border-radius:.8rem;box-shadow:0 12px 40px #102b4e30;color:var(--text)}
+.install-prompt-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:.6rem;background:var(--subtle);color:var(--blue)}
+.install-prompt-copy{min-width:0;display:grid;gap:.12rem}
+.install-prompt-copy strong{font-size:.88rem}
+.install-prompt-copy span{font-size:.75rem;color:var(--muted)}
+.install-prompt-close{width:36px;height:36px;display:grid;place-items:center;border-radius:.4rem;color:var(--muted)}
+.install-prompt-close:hover{background:var(--subtle)}
+.install-help-backdrop{position:fixed;z-index:130;inset:0;display:grid;place-items:center;padding:1rem;background:#07172dcc}
+.install-help{position:relative;width:min(420px,100%);padding:1.6rem;background:var(--panel);border:1px solid var(--border);border-radius:.9rem;box-shadow:0 20px 60px #07172d66;color:var(--text)}
+.install-help>.install-prompt-close{position:absolute;top:.7rem;right:.7rem}
+.install-help h2{margin:1rem 0 .5rem}
+.install-help p{color:var(--muted);line-height:1.7}
+.install-inline-icon{display:inline;vertical-align:middle}
+@media(max-width:520px){
+ .install-prompt{grid-template-columns:36px minmax(0,1fr) 34px;gap:.55rem;width:calc(100vw - 1.25rem);padding:.75rem}
+ .install-prompt-icon{width:36px;height:36px}
+ .install-prompt-copy{padding-right:1rem}
+ .install-prompt-copy span{font-size:.7rem;line-height:1.35}
+ .install-prompt>.btn{grid-column:2;grid-row:2;justify-self:start;min-height:40px}
+ .install-prompt-close{grid-column:3;grid-row:1;align-self:start}
+}
