@@ -566,7 +566,10 @@ function PdfPage({
         if (dead || !canvas.current) return;
         const viewport = pdfPage.getViewport({ scale });
         const mobile = window.matchMedia('(max-width: 760px)').matches;
-        const ratio = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2);
+        const deviceRatio = window.devicePixelRatio || 1;
+        const maxRatio = mobile ? 3 : 2.5;
+        const pixelBudgetRatio = Math.sqrt(16_000_000 / (viewport.width * viewport.height));
+        const ratio = Math.max(1, Math.min(deviceRatio, maxRatio, pixelBudgetRatio));
         const element = canvas.current;
         element.width = Math.floor(viewport.width * ratio);
         element.height = Math.floor(viewport.height * ratio);
